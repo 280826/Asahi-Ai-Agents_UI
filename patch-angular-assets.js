@@ -8,7 +8,7 @@ if (!fs.existsSync(file)) {
 }
 const json = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-const projectName = 'IPA-Ai-Agents_UI';
+const projectName = 'Asahi-Ai-Agents_UI';
 const project = (json.projects && json.projects[projectName]) || Object.values(json.projects || {})[0];
 if (!project) {
   console.error('Could not locate project in angular.json');
