@@ -1,0 +1,61 @@
+<div class="flex flex-col bg-white h-screen">
+  <!-- Hero / header -->
+  <div class="hero w-full relative overflow-hidden">
+    <div class="absolute top-[6.25rem] left-[6.25rem]">
+      <img ngSrc="/assets/images/login-asahi-logo.png" alt="Asahi Group - Asahi Europe & International" width="425"
+        height="72" loading="lazy" decoding="async" class="w-[27.4375rem] h-[4rem]" />
+    </div>
+  </div>
+
+  <!-- Centered login card overlapping hero -->
+  <main class="relative flex-1">
+    <div class="card-overlap flex justify-center">
+      <div class="bg-white rounded-2xl shadow-2xl p-8 ring-1 ring-gray-200 login-card w-[31.25rem] h-[33.75rem]">
+        <div class="mb-6">
+          <h2 class="text-3xl font-semibold text-slate-800">
+            Login to <span class="font-bold">Asahi AI Agents</span>
+          </h2>
+          <!-- <div class="title-underline" aria-hidden="true"></div> -->
+          <img src="/assets/images/underline.png" class="mt-2 w-[25rem]" />
+
+        </div>
+
+        <form (ngSubmit)="onLogin()" class="space-y-4" novalidate>
+          <div class="field">
+            <label for="email" class="block text-lg text-slate-600">Email</label>
+            <input id="email" type="email" [ngModel]="email()" (ngModelChange)="email.set($event)" name="email"
+              placeholder="Exp:Thomas.miller@cognizant.com" required autocomplete="email"
+              class="w-full bg-gray-100 rounded-lg px-4 py-3 text-slate-700 placeholder-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-cognizantBlue" />
+          </div>
+
+          <div class="field">
+            <label for="password" class="block text-lg text-slate-600">Password</label>
+            <input id="password" type="password" [ngModel]="password()" (ngModelChange)="password.set($event)"
+              name="password" required autocomplete="current-password"
+              class="w-full bg-gray-100 rounded-lg px-4 py-3 text-slate-700 placeholder-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-cognizantBlue" />
+          </div>
+
+          <div class="field">
+            <button type="submit" [disabled]="loading()"
+              class="w-full bg-cognizantBlue text-white font-semibold py-3 rounded-lg shadow-md hover:brightness-95 disabled:opacity-60">
+              Login
+            </button>
+          </div>
+
+          @if (error()) {
+          <div class="text-red-600 text-lg" role="alert" aria-live="polite">
+            {{ error() }}
+          </div>
+          }
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-white bg-[#004290]">
+    <div class="max-w-7xl py-4 text-lg opacity-90 pl-[6.25rem]">
+      Copyright © Asahi CE & Europe Services
+    </div>
+  </footer>
+</div>

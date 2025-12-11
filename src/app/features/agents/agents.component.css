@@ -1,0 +1,1216 @@
+/* Container - full viewport height */
+:host ::ng-deep {
+  display: contents;
+}
+
+/* Header stays fixed at top */
+header {
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08); /* 2px / 16 = 0.125rem, 8px / 16 = 0.5rem */
+}
+
+/* Ensure footer stays at bottom when content is short */
+main {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb #f3f4f6;
+  background-color: #F6F6F6;
+}
+
+main::-webkit-scrollbar {
+  width: 0.5rem; /* 8px / 16 = 0.5rem */
+}
+
+main::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 0.25rem; /* 4px / 16 = 0.25rem */
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
+}
+
+/* Hero section styling - background scrolls with content */
+section {
+  background-attachment: scroll;
+}
+
+/* Agent cards - 3 column layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem; /* 32px / 16 = 2rem */
+}
+
+/* Card hover effects */
+div[class*='bg-white rounded-xl'] {
+  transition: all 0.3s ease;
+}
+
+div[class*='bg-white rounded-xl']:hover {
+  transform: translateY(-0.25rem); /* -4px / 16 = -0.25rem */
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12); /* 12px / 16 = 0.75rem, 24px / 16 = 1.5rem */
+}
+
+/* Pagination button styling */
+button[class*='bg-cognizantBlue'] {
+  background-color: #2d63ff;
+}
+
+button[class*='bg-cognizantBlue']:hover {
+  background-color: #1d47cc;
+}
+
+/* Line clamp for description */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer styling */
+footer {
+  background-color: var(--color-asahi-blue);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header logo area */
+.header-logos {
+  align-items: center;
+}
+
+.header-logo img {
+  max-height: 5rem; /* 80px / 16 = 5rem */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Make sure separator is vertically centered */
+.header-logos .h-10 {
+  height: 4rem; /* 64px / 16 = 4rem - match image height */
+}
+
+/* Small responsive tweak */
+@media (max-width: 56.25rem) {
+  /* 900px / 16 = 56.25rem */
+  .header-logos {
+    gap: 1rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  } /* 16px = 1rem, 12px = 0.75rem */
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Center group: allow center area to expand and center content */
+.center-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+/* If left/right images missing, ensure center image remains centered */
+.header-logos > .header-logo:first-child {
+  margin-right: 0.75rem; /* 12px / 16 = 0.75rem */
+}
+.header-logos > .header-logo:last-child {
+  margin-left: 0.75rem; /* 12px / 16 = 0.75rem */
+}
+
+.separator {
+  height: 4rem;
+  width: 0.0625rem;
+  background: #e5e7eb;
+} /* 64px = 4rem, 1px = 0.0625rem */
+
+/* Middle area: make center area left-aligned next to separator while keeping right image at far right */
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* 24px / 16 = 1.5rem */
+}
+
+.header-logos > .middle {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto; /* allow middle to expand so right image stays right */
+}
+
+.header-logos > .flex.items-center.justify-end {
+  min-width: 10rem; /* 160px / 16 = 10rem */
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Hero background image - scrolls with content */
+.hero-bg {
+  background-image: url('/assets/images/agent-store-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 60rem; /* 960px / 16 = 60rem */
+}
+
+/* Hero content - relative positioning for absolute children */
+.hero-content {
+  position: relative;
+  height: 60rem; /* 960px / 16 = 60rem */
+}
+
+/* Hero heading - exact XD positioning */
+.hero-heading {
+  position: absolute;
+  top: 6.25rem; /* (220px - 120px) / 16 = 6.25rem */
+  left: 7.75rem; /* 124px / 16 = 7.75rem */
+  width: 104.5rem; /* 1672px / 16 = 104.5rem */
+  height: 6.6875rem; /* 107px / 16 = 6.6875rem */
+  text-align: center;
+  font: 600 4.5rem/5rem Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* 72px / 16 = 4.5rem, 80px / 16 = 5rem */
+  letter-spacing: 0;
+  color: #fcc200;
+  opacity: 1;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* ===== HERO KPI STRIP — CONSOLIDATED ===== */
+
+/* Heading color */
+.hero-heading {
+  color: #ffd04d;
+}
+
+/* KPI metrics strip at the old .hero-description coordinates */
+.hero-stats {
+  position: absolute;
+  top: 16rem;
+  left: 16.125rem;
+  width: 85rem;
+  height: 10.875rem;
+  display: grid;
+  grid-template-columns: 1fr 0.0625rem 1fr 0.0625rem 1fr; /* stat | divider | stat | divider | stat */
+  align-items: center;
+  justify-items: center;
+  background: transparent;
+  z-index: 7; /* search pill is z-index: 8 */
+}
+
+/* Each KPI block: 3 rows (icon+title inline, count, subtext) */
+
+/* STAT as a 2-column grid: [icon] [text column] */
+.stat {
+  display: grid;
+  grid-template-columns: auto 1fr;     /* icon column + text column */
+  grid-auto-rows: auto;
+  column-gap: 0.75rem;                 /* spacing between icon and text */
+  align-items: start;
+  justify-items: start;
+  text-align: left;
+}
+
+/* Flatten the first row so children participate directly in the parent grid */
+.stat-icon-title {
+  display: contents;                   /* critical: removes this wrapper from layout */
+}
+
+/* Icon sits in column 1, spanning all text rows */
+.stat-icon {
+  grid-column: 1;
+  grid-row: 1 / span 3;                /* icon spans title + count + subtext rows */
+}
+.stat-icon img {
+  /* width: 2.25rem;                      ~36px
+  height: 2.25rem; */
+  object-fit: contain;
+  opacity: 0.95;
+  filter: drop-shadow(0 0.125rem 0.375rem rgba(0,0,0,0.12));
+  margin: 0 0.5rem 0 0;
+}
+
+/* Every text block (title, value, subtext) starts at the same left edge */
+.stat-text-col {
+  grid-column: 2;                      /* the shared text column */
+  min-width: 0;
+}
+
+/* Typography remains per your spec */
+.stat-title {
+  font: normal normal bold 2rem/2.3125rem Arial;      /* 32px/37px */
+  color: #ffffff;
+  letter-spacing: 0.01rem;
+}
+.stat-value {
+  font: normal normal bold 3.25rem/3.75rem Arial;     /* 52px/60px */
+  color: #ffd04d;
+  margin-top: 1.25rem;
+}
+.stat-sub {
+  font: normal normal normal 1.25rem/1.4375rem Arial; /* 20px/23px */
+  color: #cfd8ea;
+}
+
+
+/* Divider */
+.stat-divider {
+  width: 0.125rem; /* 2px */
+  height: 9.5rem;
+  background: rgba(255,255,255,0.5);
+}
+
+/* Search pill stays above the metrics strip */
+.search-pill {
+  position: absolute;
+  top: 30.75rem;
+  left: 2.5rem;
+  width: 115rem;
+  height: 12.5rem;
+  z-index: 8;
+}
+
+/* Responsive */
+@media (max-width: 56.25rem) { /* 900px */
+  .hero-stats {
+    left: 2rem;
+    width: calc(100% - 4rem);
+    height: auto;
+    grid-template-columns: 1fr; /* stack KPI blocks vertically */
+    row-gap: 1rem;
+    justify-items: start;
+    padding: 0.5rem 0;
+  }
+  .stat-divider { display: none; }
+  .stat-icon-title { justify-content: flex-start; }
+}
+
+/* ===== SEARCH PILL STYLES ===== */
+/* Search pill styling - exact XD positioning and styling */
+.search-pill {
+  position: absolute;
+  top: 30.75rem; /* (612px - 120px) / 16 = 30.75rem */
+  left: 2.5rem; /* 40px / 16 = 2.5rem */
+  width: 115rem; /* 1840px / 16 = 115rem */
+  height: 12.5rem; /* 200px / 16 = 12.5rem */
+  background: rgba(255, 255, 255, 0.7);
+  border: 0.0625rem solid #707070; /* 1px / 16 = 0.0625rem */
+  border-radius: 2.5rem; /* 40px / 16 = 2.5rem */
+  position: relative;
+  z-index: 8;
+}
+
+.search-inner {
+  position: absolute;
+  top: 5rem; /* 80px / 16 = 5rem */
+  left: 2.75rem; /* 44px / 16 = 2.75rem */
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* 32px / 16 = 2rem */
+}
+
+.search-white-area {
+  width: 95.625rem; /* 1530px / 16 = 95.625rem */
+  height: 5rem; /* 80px / 16 = 5rem */
+  background: #ffffff;
+  border-radius: 2.5rem; /* 40px / 16 = 2.5rem */
+  display: flex;
+  align-items: center;
+  padding: 0 2rem; /* 0 32px / 16 */
+  gap: 1.5rem; /* 24px / 16 = 1.5rem */
+  position: relative;
+}
+
+.search-icon {
+  width: 1.5rem; /* 24px / 16 = 1.5rem */
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: normal normal normal 1.5rem/1.75rem Arial; /* 24px/28px */
+  letter-spacing: 0;
+  color: #8b8b8b;
+  opacity: 1;
+  outline: none;
+  padding: 0;
+  min-width: 15rem; /* 240px / 16 = 15rem */
+}
+
+.search-input::placeholder {
+  color: #8b8b8b;
+}
+
+.pill-divider {
+  position: absolute;
+  width: 0.125rem; /* 2px / 16 = 0.125rem */
+  height: 5rem; /* 80px / 16 = 5rem */
+  background: #b8b8b8;
+  border: none;
+  opacity: 1;
+  top: 0;
+  left: 50rem; /* 836px from pill left - 44px white area left = 792px / 16 = 49.5rem, rounded to 50rem */
+}
+
+.pill-divider-2 {
+  position: absolute;
+  width: 0.125rem; /* 2px / 16 = 0.125rem */
+  height: 5rem; /* 80px / 16 = 5rem */
+  background: #b8b8b8;
+  border: none;
+  opacity: 1;
+  top: 0;
+  left: 72.78125rem; /* 1208.5px from pill left - 44px white area left = 1164.5px / 16 = 72.78125rem */
+}
+
+.filters-inline {
+  display: flex;
+  gap: 4rem;
+  /* gap: 21.53125rem; Distance between dropdowns: (1208.5 - 836 - 2 - 20) / 16 = 21.90625rem, adjusted for spacing */
+  align-items: center;
+  flex: 1;
+  justify-content: flex-start;
+  padding-left: 2rem; /* 32px / 16 = 2rem - offset from first HR */
+}
+
+.filter-group {
+  position: absolute;
+}
+
+.filter-group-1 {
+  top: 2.1875rem; /* 35px / 16 = 2.1875rem - positioned above white area but within pill */
+  left: 53.8rem; /* Approximately centered between first HR (836px) and second HR (1208.5px) = ~1022px / 16 = 63.875rem from viewport, minus pill offset */
+}
+
+.filter-group-2 {
+  top: 2.1875rem; /* 35px / 16 = 2.1875rem - positioned above white area but within pill */
+  left: 76.5rem; /* Approximately centered in space after second HR to search button */
+}
+
+.filter-label {
+  font: normal normal bold 1.5rem/1.75rem Arial; /* 24px/28px */
+  letter-spacing: 0;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.filter-select {
+  background: transparent;
+  border: none;
+  font: normal normal normal 1.25rem/1.75rem Arial; /* 24px/28px */
+  letter-spacing: 0;
+  color: #000000;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding-right: 2.5rem; /* 40px / 16 = 2.5rem for dropdown arrow */
+  background-image: url('/assets/images/arrow.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1.5rem; /* 24px / 16 = 1.5rem */
+  padding-left: 0;
+  position: relative;
+  width: 18.75rem; /* 300px / 16 = 18.75rem */
+}
+
+.filter-select::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('/assets/images/arrow.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  transition: transform 0.2s;
+}
+
+.filter-select:focus::after {
+  transform: translateY(-50%) scaleY(-1);
+}
+
+.search-button {
+  width: 12.5rem; /* 200px / 16 = 12.5rem */
+  height: 5rem; /* 80px / 16 = 5rem */
+    background: transparent linear-gradient(180deg, #00ACED 0%, #004290 100%) 0% 0% no-repeat padding-box;
+  border-radius: 5rem; /* 80px / 16 = 5rem */
+  opacity: 1;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.search-button:hover {
+  opacity: 0.9;
+}
+
+/* Make sure main content accounts for the pill overlap */
+/* section + section,
+.grid {
+  margin-top: 6.875rem; /* 110px / 16 = 6.875rem * /
+} */
+
+/* Discover Section - exact XD positioning and styling */
+.discover-section {
+  position: relative;
+  margin-top: -8.75rem; /* -108px / 16 = -6.75rem to overlap with hero */
+  left: 2.5rem; /* 40px / 16 = 2.5rem */
+  width: 115rem; /* 1840px / 16 = 115rem */
+  height: 10rem; /* 160px / 16 = 10rem */
+  background: #F6F6F6;
+  border-radius: 2.5rem 2.5rem 0 0; /* 40px 40px 0px 0px */
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  margin-bottom: 0;
+}
+
+.discover-heading {
+  position: absolute;
+  top: 2.125rem; /* 50px / 16 = 3.125rem */
+  left: 3.75rem; /* 60px / 16 = 3.75rem */
+  width: 61.875rem; /* 990px / 16 = 61.875rem */
+  height: 3.6875rem; /* 59px / 16 = 3.6875rem */
+  text-align: left;
+  font: normal normal 600 3.22rem/3.625rem Gellix-SemiBold, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif; /* 52px / 16 = 3.25rem, 58px / 16 = 3.625rem */
+  letter-spacing: 0;
+  color: var(--color-asahi-blue);
+  margin: 0;
+  padding: 0;
+}
+
+.discover-filter {
+  position: absolute;
+  top: 2.125rem; /* 50px / 16 = 3.125rem */
+  right: 3.75rem; /* 60px / 16 = 3.75rem */
+}
+
+.discover-filter-select {
+  background: transparent;
+  border: none;
+  border-bottom: 0.125rem solid #B8B8B8; /* 2px / 16 = 0.125rem */
+  border-radius: 0;
+  font: normal normal normal 1.875rem/2.1875rem Arial; /* 30px/35px */
+  letter-spacing: 0;
+  color: #000000;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  padding: 0.625rem 3.125rem 0.625rem 0; /* 10px 50px 10px 0 */
+  background-image: url('/assets/images/filter.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 2rem; /* 32px / 16 = 2rem */
+  min-width: 15rem; /* 240px / 16 = 15rem */
+}
+
+/* --- Rem-based card design (Gellix, 520x720 in rem) --- */
+:root {
+  /* Design tokens in rem-friendly values */
+  --card-bg: #ffffff;
+  --text-body: #1f2937; /* dark gray */
+  --text-muted: #6b7280; /* mid gray */
+  --indigo: #483ea8; /* title color */
+  --accent: #4f46e5; /* accent line */
+  --divider: #e5e7eb; /* light gray */
+  --shadow-md: 0 0.5rem 1.5rem rgba(17, 24, 39, 0.08); /* 8px 24px */
+  --radius-card: 1rem; /* 16px */
+  --radius-inner: 0.75rem; /* 12px */
+
+  /* Global font already Gellix in your app; ensure fallback consistency */
+  --font-sans: Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+/* Card grid */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32.5rem, 1fr)); /* min 520px */
+  gap: 3rem 1rem; /* 32px */
+  padding: 0 2rem 1.5rem 2rem; /* 24px 32px */
+  width: 115rem;
+  left: 2.5rem;
+  position: relative;
+}
+
+/* Card container */
+.agent-card {
+  width: 32.5rem; /* 520px */
+  height: 45rem; /* 720px */
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  border: 0.0625rem solid #f3f4f6; /* 1px */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  margin: auto;
+}
+
+/* Top media */
+.agent-card__media {
+  margin: 0;
+  line-height: 0;
+}
+.agent-card__img {
+  width: 100%;
+  height: 12.5rem; /* 200px */
+  object-fit: cover;
+  display: block;
+}
+
+/* Content block */
+.agent-card__content {
+  padding: 1.5rem 1.5rem 1.25rem;
+} /* 24 24 20 */
+.agent-card__title {
+  color: var(--indigo);
+  font-weight: 800;
+  font-size: 1.625rem; /* 26px */
+  margin: 0 0 0.75rem 0; /* 12px */
+  letter-spacing: 0.0125rem; /* 0.2px -> 0.0125rem */
+}
+.agent-card__desc {
+  color: var(--text-body);
+  font-size: 1rem; /* 16px */
+  line-height: 1.55;
+  margin: 0 0 1.25rem 0; /* 20px */
+}
+
+/* Feature grid */
+.agent-card__feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* 12px */
+  min-height: 3.5rem; /* 56px */
+}
+.agent-card__icon {
+  width: 2.25rem;
+  height: 2.25rem; /* 36px */
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+}
+.agent-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+} /* 28px */
+.agent-card__icon--pill .agent-card__pill {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem; /* 36px */
+  border: 0.125rem solid var(--divider); /* 2px */
+  border-radius: 999rem;
+  font-weight: 700;
+  color: var(--text-body);
+  background: #fff;
+}
+.agent-card__label {
+  color: var(--text-muted);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.4;
+}
+.agent-card__divider {
+  width: 0.0625rem; /* 1px */
+  height: 2.5rem; /* 40px */
+  background: var(--divider);
+  justify-self: center;
+}
+
+/* Accent separator */
+.agent-card__accent {
+  height: 0.25rem; /* 4px */
+  background: linear-gradient(90deg, var(--indigo), var(--accent));
+  margin: 0 1.5rem; /* 24px */
+  border-radius: 0.125rem; /* 2px */
+}
+
+/* Footer */
+.agent-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1.5rem; /* 20 24 24 */
+}
+.agent-card__stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  color: var(--text-muted);
+}
+.agent-card__stage-icon {
+  opacity: 0.7;
+}
+.agent-card__stage-label {
+  font-weight: 500;
+}
+.agent-card__stage-value {
+  margin-left: 0.25rem;
+  font-weight: 700;
+  color: var(--text-body);
+}
+
+.agent-card__cta {
+  color: var(--indigo);
+  font-weight: 800;
+  font-size: 1.125rem; /* 18px */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  border-radius: 0.75rem; /* 12px */
+  padding: 0.5rem 0.75rem; /* 8px 12px */
+}
+.agent-card__cta:hover {
+  background: rgba(72, 62, 168, 0.08);
+}
+.agent-card__cta-arrow {
+  font-size: 1.1875rem;
+  line-height: 1;
+} /* 19px */
+
+/* Responsive tweak: stack features on small screens.
+   Card remains fixed size; grid will wrap as needed. */
+@media (max-width: 40rem) {
+  /* 640px */
+  .agent-card__features {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .agent-card__divider {
+    display: none;
+  }
+  .agent-card__img {
+    height: 10rem;
+  } /* 160px */
+}
+
+/* Prevent global `footer { ... }` from styling the card footer */
+.agent-card .agent-card__footer {
+  background: transparent !important;
+  border-top: none !important;
+}
+
+/* Round top corners of image to match card and screenshot */
+.agent-card__img {
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+}
+
+/* Accent spacing like reference */
+.agent-card__accent {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Title micro-tuning */
+.agent-card__title {
+  font-weight: 800;
+  letter-spacing: 0.01rem;
+}
+
+/* --- PIXEL-MATCH OVERRIDES (rem-based, Gellix) --- */
+:root {
+  --card-bg: #ffffff;
+  --text-body: #1f2937;
+  --text-muted: #6b7280;
+  --indigo: #483ea8;
+  --accent: #4f46e5;
+  --divider: #e5e7eb;
+  --shadow-md: 0 0.5rem 1.5rem rgba(17, 24, 39, 0.08); /* 8px 24px */
+  --radius-card: 1rem; /* 16px */
+  --radius-inner: 0.75rem; /* 12px */
+  --font-sans: Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+/* Grid must honour 32.5rem cards */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32.5rem, 1fr));
+  gap: 3rem; /* 48px */
+  padding: 1.5rem 2rem; /* 24px 32px */
+}
+
+/* Card container (exact size) */
+.agent-card {
+  width: 32.5rem; /* 520px */
+  height: 45rem; /* 720px */
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-md);
+  border: 0.0625rem solid #f3f4f6; /* 1px */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+}
+
+/* Top image must have rounded top corners */
+.agent-card__media {
+  margin: 0;
+  line-height: 0;
+}
+.agent-card__img {
+  width: 100%;
+  height: 11.25rem; /* 180px */
+  object-fit: cover;
+  display: block;
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+}
+
+/* Content */
+.agent-card__content {
+  padding: 1.5rem 1.5rem 0rem;
+  height: 28rem;
+}
+.agent-card__title {
+  color: var(--color-asahi-blue);
+  font-weight: 800;
+  /* font-size: 1.625rem; 26px */
+  font-size: 1.75rem; /* 32px */
+  letter-spacing: 0.01rem;
+  margin: 0 0 0.75rem 0;
+  height: 3rem;
+}
+.agent-card__desc {
+  color: var(--text-body);
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.4;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 0 1.25rem 0;
+  height: 14rem;
+}
+
+/* Feature row */
+.agent-card__features {
+  display: grid;
+  grid-template-columns: 1fr 0.0625rem 1fr 0.0625rem 1fr; /* 1px dividers */
+  align-items: center;
+  gap: 1rem; /* 16px */
+  height: 6rem;
+  position: relative;
+  bottom: 1rem;
+  /* padding: 1.25rem 1rem; 20px 16px */
+  /* border-top:0.0625rem solid var(--divider);
+  border-bottom:0.0625rem solid var(--divider); */
+}
+.agent-card__feature {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 0.75rem; /* 12px */
+  min-height: 3.5rem; /* 56px */
+}
+.agent-card__icon {
+  width: 3rem;
+  height: 3rem; /* 36px */
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+}
+.agent-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+} /* 28px */
+.agent-card__icon--pill .agent-card__pill {
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 0.125rem solid #b1b1b1; /* 2px */
+  /* border: 0.125rem solid var(--divider); 2px */
+  border-radius: 999rem;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text-body);
+  background: #fff;
+}
+.agent-card__label {
+  color: var(--color-black);
+  font-size: 1rem; /* 16px */
+  line-height: 1.125;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 2rem;
+  /* text-align: center; */
+  padding-left: 0.1rem;
+}
+.agent-card__divider {
+  width: 0.0625rem; /* 1px */
+  height: 5rem; /* 80px */
+  background: var(--divider);
+  justify-self: center;
+}
+
+/* Accent underline with breathing room (as in reference) */
+.agent-card__accent {
+  height: 0.25rem; /* 4px */
+  /* background: linear-gradient(90deg, var(--color-cognizant-std-blue), var(--color-cognizant-cyan)); */
+  /* background: transparent url('../../../assets/images/underline.png') 0% 0% no-repeat padding-box; */
+  background: none;
+  margin: 0.75rem 1.5rem 0; /* 0px top/bottom; 24px sides */
+  border-radius: 0.125rem; /* 2px */
+  padding: 0.125rem; /* 2px */
+}
+
+/* Card footer — neutralize global footer styles */
+.agent-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 1.5rem; /* 20 24 24 */
+  background: transparent !important;
+  border-top: none !important;
+  box-shadow: none;
+}
+.agent-card__stage {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  color: var(--text-muted);
+}
+.agent-card__stage-icon {
+  opacity: 0.7;
+  position: relative;
+  top: -0.4rem;
+  img {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+}
+.agent-card__stage-label {
+  font-weight: 600;
+  font-size: 1rem; /* 16px */
+  font-family: Arial, Helvetica, sans-serif;
+}
+.agent-card__stage-value {
+  margin-left: 0.25rem;
+  font-weight: 700;
+  font-size: 1rem; /* 16px */
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-body);
+}
+
+.agent-card__cta {
+  color: var(--color-asahi-blue);
+  font-weight: 800;
+  font-size: 1.5rem; /* 24px */
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  border-radius: 0.75rem; /* 12px */
+  padding: 0.5rem 0.75rem; /* 8px 12px */
+  position: relative;
+  top: -0.25rem;
+}
+.agent-card__cta:hover {
+  background: rgba(72, 62, 168, 0.08);
+}
+.agent-card__cta-arrow {
+  font-size: 1.1875rem;
+  line-height: 1;
+  position: relative;
+  top: 0.125rem;
+  img {
+    width: 1.5rem;
+    height: 1.75rem;
+  }
+} /* 19px */
+
+/* Small screens */
+@media (max-width: 40rem) {
+  /* 640px */
+  .agent-card__features {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .agent-card__divider {
+    display: none;
+  }
+  .agent-card__img {
+    height: 10rem;
+  } /* 160px */
+}
+
+/* --- Feature icon images (industry.png & technology.png) --- */
+.agent-card__icon img {
+  width: 2.75rem; /* 44px */
+  height: 2.75rem;
+  display: block;
+  object-fit: contain;
+  opacity: 0.9; /* subtle, like muted icons */
+}
+
+/* --- Pagination pills (screenshot-inspired) --- */
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 2rem;
+  justify-content: center;
+}
+
+.pager-btn {
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #1f2937;
+  border-radius: 0.5rem; /* 8px */
+  padding: 0.5rem 1rem; /* 8px 16px */
+  font-weight: 600;
+  cursor: pointer;
+  height: 3rem;
+  img {
+    display: inline;
+    position: relative;
+    left: 0.35rem;
+    top: -0.125rem;
+    &.left {
+      left: -0.35rem;
+    }
+  }
+  &:hover {
+    background: transparent linear-gradient(227deg, #2e318f 0%, #06c6cb 100%) 0% 0% no-repeat
+      padding-box;
+    color: #fff;
+  }
+}
+.pager-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pager-page {
+  min-width: 3rem; /* 48px-ish pill */
+  height: 3rem;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  color: #1f2937;
+  border-radius: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    background: transparent linear-gradient(227deg, #06c6cb 0%, #2e318f 100%) 0% 0% no-repeat
+      padding-box;
+    color: #fff;
+  }
+}
+.pager-page.active {
+  color: #fff;
+  border: none;
+  /* background: linear-gradient(180deg, #26efe9 0%, #2e308e 100%); */
+  background: transparent linear-gradient(227deg, #06c6cb 0%, #2e318f 100%) 0% 0% no-repeat
+    padding-box;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.pager-ellipsis {
+  padding: 0.5rem 0.75rem;
+  color: #6b7280;
+}
+
+.pager-size {
+  margin-left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pager-size select {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  background: #fff;
+  color: #1f2937;
+}
+
+/* Full-page loading overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* above everything */
+}
+
+.loading-spinner {
+  text-align: center;
+}
+
+.loading-spinner img {
+  width: 80px; /* adjust size of GIF */
+  height: 80px;
+}
+
+.loading-spinner p {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: #2e308e; /* match your theme */
+  font-weight: 600;
+}
+
+/* ===== Loading Overlay (mask) ===== */
+
+/* Theme variables for overlay tint: choose black or light grey */
+:root {
+  --overlay-bg-dark: rgba(10, 13, 58, 0.75); /* deep navy/black-ish */
+  --overlay-bg-light: rgba(17, 24, 39, 0.35); /* light grey tint */
+  --overlay-bg-active: var(--overlay-bg-dark); /* default = dark; switch to light if you prefer */
+  --overlay-z: 9999;
+  --overlay-fade-ms: 250ms; /* fade duration */
+  --overlay-text-color: #e5e7eb; /* light text on dark */
+}
+
+/* Overlay container covers whole viewport */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--overlay-z);
+  background: var(--overlay-bg-active);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none; /* not clickable when hidden */
+  transition: opacity var(--overlay-fade-ms) ease-in-out;
+}
+
+/* Visible state: enable pointer and fade to 1 */
+.loading-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Centered inner box */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+  text-align: center;
+}
+
+/* Optional loading text */
+.loading-text {
+  margin: 0.25rem 0 0;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: var(--overlay-text-color);
+}
+
+/* ===== CSS Spinner (fallback) ===== */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dual-ring spinner */
+.css-spinner {
+  width: 80px;
+  height: 80px;
+  border: 6px solid rgba(255, 255, 255, 0.25);
+  border-top-color: #26efe9; /* cyan accent */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  /* If GIF loads, both will be shown; you can hide one in HTML if preferred */
+}
+
+/* GIF spinner (optional visual) */
+.gif-spinner {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Prefer reduced motion: stop animations & fade */
+@media (prefers-reduced-motion: reduce) {
+  .loading-overlay {
+    transition: opacity 0.01ms; /* essentially no fade */
+  }
+  .css-spinner {
+    animation: none;
+    border-top-color: #26efe9;
+  }
+}
+
+/* ===== Theme toggle examples ===== */
+/* If you want a lighter tint overlay instead of dark, set this class on the overlay container */
+/* <div class="loading-overlay light" [class.visible]="loading()"> ... */
+.loading-overlay.light {
+  background: var(--overlay-bg-light);
+}
+
+/* You can also define a very dark black overlay variant */
+/* <div class="loading-overlay black" [class.visible]="loading()"> ... */
+.loading-overlay.black {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Make placeholder lighter and entered text darker (if not already) */
+.search-input {
+  color: #1f2937; /* dark gray text */
+}
+.search-input::placeholder {
+  color: #8b8b8b; /* mid gray placeholder */
+}
+
+/* Clear button inside the search pill */
+.search-clear {
+  position: relative;
+  top: 22%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #8b8b8b;
+  font-size: 2.5rem; /* ~20px */
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.search-clear:hover {
+  color: #4b5563; /* darker on hover */
+}
+
+.search-clear.hidden {
+  display: none;
+}
+
+/* Ensure the white area can position the clear button absolutely */
+.search-white-area {
+  position: relative; /* already present in your CSS; ensure it stays */
+  padding-right: 2.5rem; /* room for the clear 'X' so text doesn't overlap */
+}

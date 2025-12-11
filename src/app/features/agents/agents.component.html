@@ -1,0 +1,317 @@
+<div class="flex flex-col h-screen bg-gray-50">
+  <!-- Fixed Header - 120px height -->
+  <header class="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-10" style="height: 120px">
+    <div class="h-full px-12 flex items-center header-logos justify-between">
+      <!-- Left: IPA image -->
+      <div class="flex items-center ">
+        <div class="header-logo">
+          <a routerLink="/agents">
+            <img src="/assets/images/agent-store-asahi.png" alt="Ai-Store Asahi Group"
+              onerror="this.onerror=null;this.src='/assets/images/agent-store-asahi.png'" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Asahi Group image aligned to right -->
+      <div class="flex items-center justify-end">
+        <div class="header-logo">
+          <img src="/assets/images/asahi-home-logo.png" alt="Asahi Group"
+            onerror="this.onerror=null;this.src='/assets/images/asahi-home-logo.png'" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Scrollable Content Area (accounts for fixed header - 7.5rem) -->
+  <main id="agents-scroll" class="flex-1 overflow-y-auto" style="margin-top: 7.5rem">
+    <router-outlet></router-outlet>
+    <!-- Store grid & pagination (only when not in detail-mode) -->
+    @if (!detailMode()) {
+    <!-- your existing agents grid & pager content exactly as-is -->
+
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white">
+      <div class="hero-content text-center relative">
+        <h1 class="hero-heading">Your Unified Platform for Intelligent Agents</h1>
+
+
+
+        <!-- KPI metrics strip (icon + title inline, count + subtext below) -->
+
+        <!-- KPI metrics strip -->
+        <div class="hero-stats" role="group" aria-label="Key process metrics">
+          <!-- Procure to Pay -->
+          <div class="stat">
+            <div class="stat-icon-title">
+              <div class="stat-icon" aria-hidden="true">
+                <img ngSrc="/assets/images/p2p.png" width="71" height="57" decoding="async" loading="lazy"
+                  alt="Procure to Pay Icon" />
+              </div>
+              <div class="stat-text-col">
+                <div class="stat-title">Procure to Pay</div>
+              </div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-value">{{ metrics().p2p }}</div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-sub">Total no. of Agents</div>
+            </div>
+          </div>
+
+          <div class="stat-divider" aria-hidden="true"></div>
+
+          <!-- Order to Cash -->
+          <div class="stat">
+            <div class="stat-icon-title">
+              <div class="stat-icon" aria-hidden="true">
+                <img ngSrc="/assets/images/otc.png" width="64" height="56" decoding="async" loading="lazy"
+                  alt="Order to Cash Icon" />
+              </div>
+              <div class="stat-text-col">
+                <div class="stat-title">Order to Cash</div>
+              </div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-value">{{ metrics().otc }}</div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-sub">Total no. of Agents</div>
+            </div>
+          </div>
+
+          <div class="stat-divider" aria-hidden="true"></div>
+
+          <!-- Record to Report -->
+          <div class="stat">
+            <div class="stat-icon-title">
+              <div class="stat-icon" aria-hidden="true">
+                <img ngSrc="/assets/images/rtr.png" width="47" height="56" decoding="async" loading="lazy"
+                  alt="Record to Report Icon" />
+              </div>
+              <div class="stat-text-col">
+                <div class="stat-title">Record to Report</div>
+              </div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-value">{{ metrics().rtr }}</div>
+            </div>
+            <div class="stat-text-col">
+              <div class="stat-sub">Total no. of Agents</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search pill overlay (positioned at exact XD coords) -->
+        <div class="search-pill" role="search">
+          <div class="filter-group filter-group-1">
+            <label class="filter-label">By Industries</label>
+          </div>
+          <div class="filter-group filter-group-2">
+            <label class="filter-label">By Technology</label>
+          </div>
+
+          <!--  (click)="$event.stopPropagation()" -->
+          <div class="search-inner">
+            <div class="search-white-area">
+              <img src="/assets/images/search.png" />
+
+              <input class="search-input" placeholder="Search AI Agents..." [value]="searchText()"
+                (input)="onSearchInput($event)" (keydown.escape)="clearSearch()" (keydown.enter)="applyFilters()">
+
+              <button type="button" class="search-clear" [class.hidden]="!searchText()" (click)="clearSearch()"
+                aria-label="Clear search">
+                ×
+              </button>
+
+              <div class="pill-divider"></div>
+
+              <div class="filters-inline">
+                <!-- Industry select -->
+                <select class="filter-select" [value]="selectedIndustry()" (change)="onIndustryChange($event)">
+                  <!-- <option value="">All</option> -->
+                  @for (opt of verticalOptions(); track opt._id) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                  }
+                </select>
+                <!-- </div> -->
+
+
+                <div class="pill-divider-2"></div>
+
+                <!-- Technology select -->
+
+                <!-- <div class="filter-group filter-group-2"> -->
+                <!-- <span class="filter-label">By Technology</span> -->
+                <select class="filter-select" [value]="selectedTechnology()" (change)="onTechnologyChange($event)">
+                  <!-- <option value="">All</option> -->
+                  @for (opt of techOptions(); track opt._id) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                  }
+                </select>
+                <!-- </div> -->
+
+              </div>
+            </div>
+
+            <button class="search-button" (click)="applyFilters()">Search</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discover Section with heading background -->
+    <section class="discover-section">
+      <h2 class="discover-heading">Discover Intelligent AI Agents in Our Store</h2>
+      <div class="discover-filter">
+        <select class="discover-filter-select" [value]="selectedStage()" (change)="onStageChange($event)">
+          <!-- <option value="">All</option> -->
+          @for (opt of stageOptions(); track opt._id) {
+          <option [value]="opt.label">{{ opt.label }}</option>
+          }
+        </select>
+      </div>
+    </section>
+
+    <!-- Agents Grid Section -->
+    <section class="agents-store">
+      <section class="agents-grid" role="list">
+        @for (agent of agents(); track agent.id) {
+        <article class="agent-card" role="listitem" aria-label="{{ agent.name }} card">
+          <!-- Hero image -->
+          <figure class="agent-card__media">
+            <img [src]="agent.thumbnailUrl || 'assets/images/temp/Mask Group 2.png'"
+              [alt]="agent.thumbnailUrl || 'Warehouse aisle with a person holding a tablet'" loading="lazy"
+              class="agent-card__img" />
+          </figure>
+
+          <!-- Content -->
+          <div class="agent-card__content">
+            <h2 class="agent-card__title truncate" [title]="agent.name">{{ agent.name }}</h2>
+
+            <p class="agent-card__desc line-clamp-8" [title]="agent.description">
+              {{ agent.description }}
+            </p>
+
+            <!-- Feature grid -->
+            <div class="agent-card__features" role="list">
+              <!-- Industry (left) -->
+              <div class="agent-card__feature" role="listitem">
+                <div class="agent-card__icon" aria-hidden="true">
+                  <!-- /assets/images/industry.png -->
+                  <img src="/assets/images/industry.png" alt="" />
+                </div>
+                <div class="agent-card__label">{{ agent.industry || 'Supply Chain' }}</div>
+              </div>
+
+              <div class="agent-card__divider" aria-hidden="true"></div>
+
+              <!-- Agent count (center) -->
+              <div class="agent-card__feature" role="listitem">
+                <div class="agent-card__icon agent-card__icon--pill" aria-hidden="true">
+                  <span class="agent-card__pill">{{ agent.agentCount }}</span>
+                </div>
+                <div class="agent-card__label">Agent count</div>
+              </div>
+
+              <div class="agent-card__divider" aria-hidden="true"></div>
+
+              <!-- Technology (right) -->
+              <div class="agent-card__feature" role="listitem">
+                <div class="agent-card__icon" aria-hidden="true">
+                  <!-- /assets/images/technology.png -->
+                  <img src="/assets/images/technology.png" alt="" />
+                </div>
+                <div class="agent-card__label">
+                  {{ agent.technology || 'Copilot Studio | UiPath Agentic' }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accent underline -->
+          <div class="agent-card__accent">
+            <img src="/assets/images/underline.png" class="mt-2 w-[30rem]" />
+          </div>
+
+          <!-- Footer -->
+          <div class="agent-card__footer">
+            <div class="agent-card__stage">
+              <span class="agent-card__stage-icon">
+                <img src="/assets/images/tag.png" alt="Stage" />
+              </span>
+              <span class="agent-card__stage-label">Stage:</span>
+              <span class="agent-card__stage-value">{{ agent.stage }}</span>
+            </div>
+
+            <!-- CTA (button; swap to routerLink if you have a details route) -->
+            <button class="agent-card__cta" type="button" (click)="openAgent(agent.id)"
+              aria-label="Explore agent {{ agent.name }}">
+              Explore Agent
+              <span class="agent-card__cta-arrow">
+                <img src="/assets/images/explore.png" alt="" />
+              </span>
+            </button>
+          </div>
+        </article>
+        }
+      </section>
+    </section>
+
+    <!-- Pagination (pills style) -->
+    <nav class="pager" aria-label="Pagination">
+      <button class="pager-btn" (click)="prev()" [disabled]="!useCursor() && pageIndex() === 0"><span><img class="left"
+            src="/assets/images/left.png"></span> Previous</button>
+      @for (p of pagePills(); track p) {
+      @if (p === '…') {
+      <span class="pager-ellipsis">…</span>
+      } @else {
+      <button class="pager-page" (click)="gotoPage(p)" [class.active]="(+p) === (pageIndex() + 1)">
+        {{ p }}
+      </button>
+      }
+      }
+      <button class="pager-btn" (click)="next()" [disabled]="!useCursor() && (pageIndex() + 1 >= totalPages())">Next
+        <span><img src="/assets/images/right.png"></span></button>
+      <span class="pager-size">
+        Page size:
+        <select [value]="pageSize()" (change)="changeSize($any($event.target).value)">
+          <option>6</option>
+          <option>12</option>
+          <option>18</option>
+          <option>24</option>
+        </select>
+      </span>
+    </nav>
+
+    <!-- Loading / Error -->
+    @if (loading()) {
+    <div style="padding: 1rem 2rem">Loading...</div>
+    } @if (error()) {
+    <div class="error" style="padding: 1rem 2rem; color: #b91c1c">{{ error() }}</div>
+    }
+    }
+    <!-- Page footer -->
+    <!-- Footer - Static Position -->
+    <footer class="bg-cognizantDark text-white border-t border-gray-700">
+      <div class="mx-auto px-8 py-4">
+        <p class="text-sm">©2025 Cognizant, all rights reserved | Privacy Policy</p>
+      </div>
+    </footer>
+
+    <!-- Full-page loading overlay (always present for fade in/out) -->
+    <div class="loading-overlay black" [class.visible]="loading()" role="status" aria-live="polite"
+      aria-busy="{{ loading() }}">
+      <div class="loading-container" aria-label="Loading, please wait">
+        <!-- CSS spinner (fallback & default) -->
+        <div class="css-spinner" aria-hidden="false"></div>
+
+        <!-- GIF (optional visual) -->
+        <!-- /assets/images/loading.gif -->
+        <!-- Optional text -->
+        <p class="loading-text">Loading, please wait...</p>
+      </div>
+    </div>
+  </main>
+</div>
