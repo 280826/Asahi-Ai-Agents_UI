@@ -24,6 +24,12 @@ export class LoginComponent {
 
   async onLogin(): Promise<void> {
     this.error.set(null);
+
+    if (!this.email().trim() || !this.password().trim()) {
+      this.error.set('Email / Password cannot be empty!');
+      return;
+    }
+
     this.loading.set(true);
 
     try {
