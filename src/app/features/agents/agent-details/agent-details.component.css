@@ -10,9 +10,10 @@
 .agent-hero {
   height: 12.5rem;
   /* 200px */
-  background-image: url('/assets/images/details/gradient-bg.png');
+  /* background-image: url('/assets/images/details/gradient-bg.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
+  background: transparent linear-gradient(264deg, #004290 0%, #00ACED 30%, #004290 100%) 0% 0% no-repeat padding-box;
   background-position: center;
   color: #ffffff;
   display: flex;
@@ -53,7 +54,7 @@
   line-height: 3.1875rem;
   /* 51px */
   letter-spacing: 0;
-  color: #ffffff;
+  color: var(--color-asahi-yellow);
 }
 
 .agent-hero__stage {
@@ -422,7 +423,7 @@
   font-size: 2.5rem;
   line-height: 1.75rem;
   /* 28px */
-  color: #ffffff;
+  color: var(--color-asahi-yellow);
   display: inline-flex;
   align-items: center;
   gap: 5rem;
@@ -447,7 +448,7 @@
   padding: 0;
   margin: 0;
   display: inline-flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   /* single line on desktop */
   gap: 2.5rem;
   /* 40px between items */
