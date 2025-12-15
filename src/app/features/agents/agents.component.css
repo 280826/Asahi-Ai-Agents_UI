@@ -149,13 +149,60 @@ footer {
 }
 
 /* Hero background image - scrolls with content */
+/* keep the design height in rem so it scales with html font-size */
 .hero-bg {
   background-image: url('/assets/images/agent-store-bg.png');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   position: relative;
-  height: 60rem; /* 960px / 16 = 60rem */
+  height: 60rem; /* 960px @ 16px base; will scale with rem */
+}
+
+/* Center a fixed max-width container for XD-accurate placement. */
+.hero-content,
+.search-pill,
+.discover-section,
+.agents-grid {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Ensure hero content uses internal padding rather than viewport left offsets */
+.hero-content { padding-left: 2.5rem; padding-right: 2.5rem; }
+
+/* Position inner white area with padding rather than large absolute lefts */
+.search-inner {
+  position: absolute;
+  top: 5rem;
+  left: 2.75rem;
+  right: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Use percentage-based dividers instead of hard rem offsets */
+.pill-divider {
+  position: absolute;
+  width: 0.125rem;
+  height: 5rem;
+  background: #b8b8b8;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pill-divider-2 {
+  position: absolute;
+  width: 0.125rem;
+  height: 5rem;
+  background: #b8b8b8;
+  top: 0;
+  left: 75%;
+  transform: translateX(-50%);
 }
 
 /* Hero content - relative positioning for absolute children */
@@ -168,18 +215,13 @@ footer {
 .hero-heading {
   position: absolute;
   top: 6.25rem; /* (220px - 120px) / 16 = 6.25rem */
-  left: 7.75rem; /* 124px / 16 = 7.75rem */
-  width: 104.5rem; /* 1672px / 16 = 104.5rem */
   height: 6.6875rem; /* 107px / 16 = 6.6875rem */
-  text-align: center;
   font: 600 4.5rem/5rem Gellix, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* 72px / 16 = 4.5rem, 80px / 16 = 5rem */
-  letter-spacing: 0;
   color: #fcc200;
-  opacity: 1;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
-
 
 
 /* ===== HERO KPI STRIP — CONSOLIDATED ===== */
@@ -193,8 +235,7 @@ footer {
 .hero-stats {
   position: absolute;
   top: 16rem;
-  left: 16.125rem;
-  width: 85rem;
+  width: 80rem;
   height: 10.875rem;
   display: grid;
   grid-template-columns: 1fr 0.0625rem 1fr 0.0625rem 1fr; /* stat | divider | stat | divider | stat */
@@ -246,6 +287,9 @@ footer {
 .stat-title {
   font: normal normal bold 2rem/2.3125rem Arial;      /* 32px/37px */
   color: #ffffff;
+  margin: 0;
+  padding: 0;
+  width: 87.75rem; /* 1404px / 16 = 87.75rem */
   letter-spacing: 0.01rem;
 }
 .stat-value {
@@ -264,52 +308,26 @@ footer {
   width: 0.125rem; /* 2px */
   height: 9.5rem;
   background: rgba(255,255,255,0.5);
+  margin-right: 5rem;
 }
 
-/* Search pill stays above the metrics strip */
-.search-pill {
-  position: absolute;
-  top: 30.75rem;
-  left: 2.5rem;
-  width: 115rem;
-  height: 12.5rem;
-  z-index: 8;
-}
-
-/* Responsive */
-@media (max-width: 56.25rem) { /* 900px */
-  .hero-stats {
-    left: 2rem;
-    width: calc(100% - 4rem);
-    height: auto;
-    grid-template-columns: 1fr; /* stack KPI blocks vertically */
-    row-gap: 1rem;
-    justify-items: start;
-    padding: 0.5rem 0;
-  }
-  .stat-divider { display: none; }
-  .stat-icon-title { justify-content: flex-start; }
-}
-
-/* ===== SEARCH PILL STYLES ===== */
 /* Search pill styling - exact XD positioning and styling */
 .search-pill {
   position: absolute;
-  top: 30.75rem; /* (612px - 120px) / 16 = 30.75rem */
-  left: 2.5rem; /* 40px / 16 = 2.5rem */
-  width: 115rem; /* 1840px / 16 = 115rem */
-  height: 12.5rem; /* 200px / 16 = 12.5rem */
+  top: 30.75rem;
+  height: 12.5rem;
   background: rgba(255, 255, 255, 0.7);
-  border: 0.0625rem solid #707070; /* 1px / 16 = 0.0625rem */
-  border-radius: 2.5rem; /* 40px / 16 = 2.5rem */
-  position: relative;
-  z-index: 8;
+  border: 0.0625rem solid #707070;
+  border-radius: 2.5rem;
+  /* z-index: 8; */
+  width: 115rem;
 }
 
 .search-inner {
   position: absolute;
   top: 5rem; /* 80px / 16 = 5rem */
   left: 2.75rem; /* 44px / 16 = 2.75rem */
+  right: 2.75rem;
   display: flex;
   align-items: center;
   gap: 2rem; /* 32px / 16 = 2rem */
@@ -359,7 +377,8 @@ footer {
   border: none;
   opacity: 1;
   top: 0;
-  left: 50rem; /* 836px from pill left - 44px white area left = 792px / 16 = 49.5rem, rounded to 50rem */
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pill-divider-2 {
@@ -370,17 +389,17 @@ footer {
   border: none;
   opacity: 1;
   top: 0;
-  left: 72.78125rem; /* 1208.5px from pill left - 44px white area left = 1164.5px / 16 = 72.78125rem */
+  left: 75%;
+  transform: translateX(-50%);
 }
 
 .filters-inline {
   display: flex;
-  gap: 4rem;
-  /* gap: 21.53125rem; Distance between dropdowns: (1208.5 - 836 - 2 - 20) / 16 = 21.90625rem, adjusted for spacing */
+  gap: 5rem;
   align-items: center;
   flex: 1;
   justify-content: flex-start;
-  padding-left: 2rem; /* 32px / 16 = 2rem - offset from first HR */
+  padding-left: 0rem;
 }
 
 .filter-group {
@@ -389,12 +408,12 @@ footer {
 
 .filter-group-1 {
   top: 2.1875rem; /* 35px / 16 = 2.1875rem - positioned above white area but within pill */
-  left: 53.8rem; /* Approximately centered between first HR (836px) and second HR (1208.5px) = ~1022px / 16 = 63.875rem from viewport, minus pill offset */
+  left: 45.4%;
 }
 
 .filter-group-2 {
   top: 2.1875rem; /* 35px / 16 = 2.1875rem - positioned above white area but within pill */
-  left: 76.5rem; /* Approximately centered in space after second HR to search button */
+  left: 66%;
 }
 
 .filter-label {
@@ -451,7 +470,7 @@ footer {
   opacity: 1;
   color: white;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.0625rem; /* 17px / 16 = 1.0625rem */
   font-weight: 600;
   font-family: Arial, sans-serif;
   cursor: pointer;
@@ -473,17 +492,17 @@ footer {
 /* Discover Section - exact XD positioning and styling */
 .discover-section {
   position: relative;
-  margin-top: -8.75rem; /* -108px / 16 = -6.75rem to overlap with hero */
-  left: 2.5rem; /* 40px / 16 = 2.5rem */
-  width: 115rem; /* 1840px / 16 = 115rem */
-  height: 10rem; /* 160px / 16 = 10rem */
+  margin-top: -8.75rem;
+  max-width: 115rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  height: 10rem;
   background: #F6F6F6;
-  border-radius: 2.5rem 2.5rem 0 0; /* 40px 40px 0px 0px */
+  border-radius: 2.5rem 2.5rem 0 0;
   opacity: 1;
   display: flex;
   align-items: center;
   padding: 0 1.5rem;
-  margin-bottom: 0;
 }
 
 .discover-heading {
@@ -754,6 +773,7 @@ footer {
   grid-template-columns: repeat(auto-fill, minmax(32.5rem, 1fr));
   gap: 3rem; /* 48px */
   padding: 1.5rem 2rem; /* 24px 32px */
+  width: 115rem;
 }
 
 /* Card container (exact size) */
@@ -977,14 +997,14 @@ footer {
 }
 
 .pager-btn {
-  border: 1px solid #e5e7eb;
+  border: 0.0625rem solid #e5e7eb;
   background: #fff;
   color: #1f2937;
   border-radius: 0.5rem; /* 8px */
-  padding: 0.5rem 1rem; /* 8px 16px */
+  padding: 0rem 1rem; /* 0px 16px */
   font-weight: 600;
   cursor: pointer;
-  height: 3rem;
+  height: 3.125rem;
   img {
     display: inline;
     position: relative;
@@ -995,8 +1015,7 @@ footer {
     }
   }
   &:hover {
-    background: transparent linear-gradient(227deg, #2e318f 0%, #06c6cb 100%) 0% 0% no-repeat
-      padding-box;
+    background: transparent linear-gradient(227deg, #2E318F 0%, #06C6CB 100%) 0% 0% no-repeat padding-box;
     color: #fff;
   }
 }
@@ -1006,19 +1025,18 @@ footer {
 }
 
 .pager-page {
-  min-width: 3rem; /* 48px-ish pill */
-  height: 3rem;
+  min-width: 3.125rem; /* 50px-ish pill */
+  height: 3.125rem;
   text-align: center;
-  border: 1px solid #e5e7eb;
+  border: 0.0625rem solid #e5e7eb;
   background: #fff;
   color: #1f2937;
   border-radius: 0.625rem;
-  padding: 0.5rem 0.75rem;
+  /* padding: 0.5rem 0.75rem; */
   font-weight: 700;
   cursor: pointer;
   &:hover {
-    background: transparent linear-gradient(227deg, #06c6cb 0%, #2e318f 100%) 0% 0% no-repeat
-      padding-box;
+    background: transparent linear-gradient(227deg, #06C6CB 0%, #2E318F 100%) 0% 0% no-repeat padding-box;
     color: #fff;
   }
 }
@@ -1026,8 +1044,7 @@ footer {
   color: #fff;
   border: none;
   /* background: linear-gradient(180deg, #26efe9 0%, #2e308e 100%); */
-  background: transparent linear-gradient(227deg, #06c6cb 0%, #2e318f 100%) 0% 0% no-repeat
-    padding-box;
+  background: transparent linear-gradient(227deg, #06C6CB 0%, #2E318F 100%) 0% 0% no-repeat padding-box;
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
 }
 
@@ -1043,7 +1060,7 @@ footer {
   gap: 0.5rem;
 }
 .pager-size select {
-  border: 1px solid #e5e7eb;
+  border: 0.0625rem solid #e5e7eb;
   border-radius: 0.5rem;
   padding: 0.4rem 0.6rem;
   background: #fff;
@@ -1190,19 +1207,19 @@ footer {
 /* Clear button inside the search pill */
 .search-clear {
   position: relative;
-  top: 22%;
-  transform: translateY(-50%);
+  top: -0.35rem;
+  left: -2.5rem;
   background: transparent;
   border: none;
   color: #8b8b8b;
-  font-size: 2.5rem; /* ~20px */
+  font-size: 2.5rem;    /* ~20px */
   line-height: 1;
   cursor: pointer;
   padding: 0;
 }
 
 .search-clear:hover {
-  color: #4b5563; /* darker on hover */
+  color: #4b5563;        /* darker on hover */
 }
 
 .search-clear.hidden {
@@ -1211,6 +1228,6 @@ footer {
 
 /* Ensure the white area can position the clear button absolutely */
 .search-white-area {
-  position: relative; /* already present in your CSS; ensure it stays */
+  position: relative;    /* already present in your CSS; ensure it stays */
   padding-right: 2.5rem; /* room for the clear 'X' so text doesn't overlap */
 }

@@ -1,6 +1,6 @@
 import { Component, inject, signal, ChangeDetectionStrategy, computed } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Router, ActivatedRoute, RouterOutlet, NavigationEnd, RouterModule } from '@angular/router';
+import { Router, ActivatedRoute, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter, finalize } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
 import {
@@ -15,9 +15,6 @@ import { mapUsecaseItemToAgent } from '../../models/mapper';
 
 type StageApi = 'Prod' | 'Solution' | 'POC' | string;
 type StageUi = 'Production' | 'Solution' | 'POC' | '' | string;
-
-/** Process buckets shown above the search pill */
-type ProcessKey = 'Procure to Pay' | 'Order to Cash' | 'Record to Report';
 
 // Stage label mapping (UI ↔ API)
 function toUiStage(api: StageApi | undefined): StageUi {
@@ -37,7 +34,7 @@ function toApiStage(ui: StageUi | undefined): StageApi | undefined {
   if (!ui) return undefined;
   switch (ui.trim()) {
     case 'Production':
-      return 'Prod';
+      return 'Production';
     case 'POC':
       return 'POC';
     case 'Solution':
@@ -48,8 +45,9 @@ function toApiStage(ui: StageUi | undefined): StageApi | undefined {
 }
 
 @Component({
+  standalone: true,
   selector: 'app-agents',
-  imports: [CommonModule, NgOptimizedImage, RouterOutlet, RouterModule],
+  imports: [CommonModule, RouterOutlet, NgOptimizedImage],
   templateUrl: './agents.component.html',
   styleUrls: ['./agents.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -174,7 +172,8 @@ export class AgentsComponent {
   // ----- Lifecycle -----
   ngOnInit(): void {
     // fetch dropdowns once
-    this.svc.dropdowns().subscribe({
+    // site = 'asahi' for asahi agents store
+    this.svc.dropdowns('asahi').subscribe({
       next: (dd: DropdownsDTO) => {
         const v = dd?.data?.vertical ?? [];
         const s = dd?.data?.stage ?? [];
@@ -247,16 +246,18 @@ export class AgentsComponent {
     this.updateDetailModeFromSnapshot();
 
     // Toggle detail mode based on child :id
-    this.router.events.pipe(filter((e) => e instanceof NavigationEnd)).subscribe(() => {
-      // update detail mode
-      this.updateDetailModeFromSnapshot();
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => {
+        // update detail mode
+        this.updateDetailModeFromSnapshot();
 
-      // If we've entered detail mode, ensure the scrollable container is at the top.
-      // Use a microtask to let the router/outlet render before changing scroll.
-      if (this.detailMode()) {
-        Promise.resolve().then(() => this.scrollMainToTop());
-      }
-    });
+        // If we've entered detail mode, ensure the scrollable container is at the top.
+        // Use a microtask to let the router/outlet render before changing scroll.
+        if (this.detailMode()) {
+          Promise.resolve().then(() => this.scrollMainToTop());
+        }
+      });
   }
 
   // ----- Data fetch -----

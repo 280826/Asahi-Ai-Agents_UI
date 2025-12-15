@@ -1,6 +1,6 @@
 <div class="flex flex-col h-screen bg-gray-50">
   <!-- Fixed Header - 120px height -->
-  <header class="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-10" style="height: 120px">
+  <header class="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-10 h-[7.5rem]">
     <div class="h-full px-12 flex items-center header-logos justify-between">
       <!-- Left: Asahi image -->
       <div class="flex items-center ">
@@ -32,7 +32,7 @@
 
     <!-- Hero Section -->
     <section class="hero-bg text-white">
-      <div class="hero-content text-center relative">
+      <div class="hero-content text-center relative flex justify-center">
         <h1 class="hero-heading">Your Unified Platform for Intelligent Agents</h1>
 
 
@@ -132,7 +132,7 @@
                 <select class="filter-select" [value]="selectedIndustry()" (change)="onIndustryChange($event)">
                   <!-- <option value="">All</option> -->
                   @for (opt of verticalOptions(); track opt._id) {
-                  <option [value]="opt.value">{{ opt.label }}</option>
+                  <option [value]="opt.value" [selected]="opt.value === selectedIndustry()">{{ opt.label }}</option>
                   }
                 </select>
                 <!-- </div> -->
@@ -147,7 +147,7 @@
                 <select class="filter-select" [value]="selectedTechnology()" (change)="onTechnologyChange($event)">
                   <!-- <option value="">All</option> -->
                   @for (opt of techOptions(); track opt._id) {
-                  <option [value]="opt.value">{{ opt.label }}</option>
+                  <option [value]="opt.value" [selected]="opt.value === selectedTechnology()">{{ opt.label }}</option>
                   }
                 </select>
                 <!-- </div> -->
@@ -168,7 +168,7 @@
         <select class="discover-filter-select" [value]="selectedStage()" (change)="onStageChange($event)">
           <!-- <option value="">All</option> -->
           @for (opt of stageOptions(); track opt._id) {
-          <option [value]="opt.label">{{ opt.label }}</option>
+          <option [value]="opt.value" [selected]="opt.value === selectedStage()">{{ opt.label }}</option>
           }
         </select>
       </div>
