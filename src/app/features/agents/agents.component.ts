@@ -169,6 +169,12 @@ export class AgentsComponent {
     return { p2p, otc, rtr };
   });
 
+  agentsCount = signal<{ 'F&A- P2P': number; 'F&A-OTC': number; 'F&A-RTR': number }>({
+    'F&A- P2P': 0,
+    'F&A-OTC': 0,
+    'F&A-RTR': 0,
+  });
+
   // ----- Lifecycle -----
   ngOnInit(): void {
     // fetch dropdowns once
@@ -275,6 +281,11 @@ export class AgentsComponent {
             const items: UsecaseListItemDTO[] = data?.items ?? [];
             this.agents.set(items.map(mapUsecaseItemToAgent));
             this.total.set(data?.total ?? (this.total() || items.length));
+            this.agentsCount.set({
+              'F&A- P2P': data?.agentsCount?.['F&A- P2P'] ?? 0,
+              'F&A-OTC': data?.agentsCount?.['F&A-OTC'] ?? 0,
+              'F&A-RTR': data?.agentsCount?.['F&A-RTR'] ?? 0,
+            });
             // advance cursor id using last item or server-provided id
             const last = items[items.length - 1];
             const nextId = last?._id ?? data?.id;
@@ -297,6 +308,11 @@ export class AgentsComponent {
             const items: UsecaseListItemDTO[] = data?.items ?? [];
             this.agents.set(items.map(mapUsecaseItemToAgent));
             this.total.set(data?.total ?? items.length);
+            this.agentsCount.set({
+              'F&A- P2P': data?.agentsCount?.['F&A- P2P'] ?? 0,
+              'F&A-OTC': data?.agentsCount?.['F&A-OTC'] ?? 0,
+              'F&A-RTR': data?.agentsCount?.['F&A-RTR'] ?? 0,
+            });
             this.pageIndex.set((data?.page ?? page) - 1);
             this.pageSize.set(data?.limit ?? this.pageSize());
             this.error.set(null);

@@ -1,4 +1,3 @@
-
 /** Exact server item shape */
 export interface UsecaseListItemDTO {
   _id: string;
@@ -42,6 +41,7 @@ export interface UsecaseListItemDTO {
 export interface UsecaseListResponseDTO {
   ok?: boolean;
   data: {
+    agentsCount: { [key: string]: number };
     items: UsecaseListItemDTO[];
     total: number;     // total matches across all pages
     page?: number;     // 1-based (offset mode)
